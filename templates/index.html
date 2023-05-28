@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+  <title>Copy Writer</title>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/login">Login</a></li>
+    </ul>
+  </nav>
+
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='copywriting.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='copywriting.png') }}" class="icon" />
+
+  <h3>Copy Writer</h3>
+
+
+  <form action="/" method="post">
+    
+    <input type="text" name="topic" placeholder="Enter a topic of interest" required />
+   
+    <hr>
+
+    <select name="persona" id="persona" >
+      {% for persona in personas %}
+      <option value="{{ persona }}">{{ persona }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="tone" id="tone"  >
+      {% for tone in tones %}
+      <option value="{{ tone }}">{{ tone }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="languagetype" id="languagetype" >
+      {% for languagetype in languagetypes %}
+      <option value="{{ languagetype }}">{{ languagetype }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="purpose" id="purpose" >
+      {% for purpose in purposes %}
+      <option value="{{ purpose }}">{{ purpose }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="language" id="language"  >
+      {% for language in languages %}
+      <option value="{{ language }}">{{ language }}</option>
+      {% endfor %}
+    </select>
+
+
+    <input type="submit" value="Generate Post" />
+
+
+  </form>
+  <hr>
+  <hr>
+
+  
+  {% if result %}
+
+    <h3>Result</h3>
+    <div class="result-box">
+      <div class="result">{{ result }}</div>
+      <hr>
+      <button onclick="copyToClipboard()">Copy</button>
+    </div>
+  {% endif %}
+
+  <script>
+    function copyToClipboard() {
+      const resultElement = document.querySelector('.result');
+      const textToCopy = resultElement.textContent;
+    
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert('Copied to clipboard!');
+        })
+        .catch((error) => {
+          console.error('Failed to copy text: ', error);
+        });
+    }
+    </script>
+    
+  <hr>
+
+
+</body>
+
