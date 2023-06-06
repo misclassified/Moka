@@ -3,9 +3,12 @@ import json
 
 import openai
 from flask import Flask, redirect, render_template, request, url_for
+from .src.openaifuncs import get_completion
+
 
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 
 @app.route("/", methods=("GET", "POST"))
@@ -29,86 +32,96 @@ def index():
     if request.method == "POST":
 
         topic = request.form["topic"]
+        channel = request.form["channel"]
         tone = request.form["tone"]
-        languagetype = request.form["languagetype"]
         persona = request.form["persona"]
         purpose = request.form["purpose"]
         language = request.form["language"]
 
         prompt = one_shot_prompt(
-            words = 30,
-            type = "post",
-            channel = "Twitter",
             topic=topic,
+            channel = channel,
             persona = persona,
             tone=tone,
-            languagetype = languagetype,
             purpose = purpose,
+            words = 30,
             language = language)
 
-        response = get_completion(prompt)
-        resjson = json.loads(response)
+        results = get_completion(prompt)
+        resjson = json.loads(results)
         print(resjson)
-    
-        return redirect(url_for(
-             "index", 
-             result= response,
-             personas=comm_chart["Persona"],
-             tones=comm_chart["Tone"],
-             languagetypes=comm_chart["LanguageType"],
-             purposes=comm_chart["Purpose"],
-             languages=comm_chart["Language"],
-             ))
+        print(prompt)
+
+        return render_template(
+             "results.html", 
+             results=[resjson[x] for x in resjson.keys()],
+             topic=topic,
+             channels= [channel] + comm_chart["Channel"],
+             personas= [persona] + comm_chart["Persona"],
+             tones= [tone] + comm_chart["Tone"],
+             purposes= [purpose] + comm_chart["Purpose"],
+             languages= [language] + comm_chart["Language"],
+             )
     
     elif request.method == "GET":
         
-        result = request.args.get("result") # None
+        results = request.args.get("results") # None
 
         return render_template(
             "index.html", 
-            result=result,
+            results=results,
+            channels=comm_chart["Channel"],
             personas=comm_chart["Persona"],
             tones=comm_chart["Tone"],
-            languagetypes=comm_chart["LanguageType"],
             purposes=comm_chart["Purpose"],
             languages=comm_chart["Language"],
                                )
 
 
-def get_completion(prompt, model="gpt-3.5-turbo", temperature = 0):
-    messages = [{"role": "user", "content": prompt}]
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=temperature, # this is the degree of randomness of the model's output
-    )
-    return response.choices[0].message["content"]
+@app.route('/results')
+def results():
+    return render_template(
+            "results.html")
+
+@app.route('/about')
+def about():
+    return render_template(
+            "base.html")
+
+@app.route('/redirect')
+def redirect_to_main():
+    return redirect(url_for('index'))
+
+@app.route('/login')
+def login():
+    return render_template(
+            "base.html")
 
 
 
-def one_shot_prompt(words = None, 
-             type = None, 
+
+
+def one_shot_prompt(
+             topic = None,
              channel = None, 
-             topic = None, 
              persona = None, 
              tone = None, 
-             languagetype = None, 
              purpose = None,
+             words = None, 
              language = None):
     
     prompt = f"""
 
-    Write three post for {channel}  about 
+    You are copywriter for a digital marketing agency. You are asked
+    to write three post for {channel}  about the topic in treble backtick 
     
-    the topic in treble backtick ```{topic}``` .
+    ```{topic}``` .
 
-    The audiene persona is {persona} and the tone is {tone}.
+    The audience persona is {persona} and the tone is {tone}.
 
-    Use a {languagetype} language. The goal of the post is to {purpose}.
+    The goal of the post is to {purpose}.
 
-    Use at most {words} words.
-
-    Language is {language}.
+    Use at most {words} words. Language is {language}.
 
     Generate the output as a JSON object, for example:
 

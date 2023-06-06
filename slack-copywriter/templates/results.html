@@ -79,17 +79,20 @@
     }
 </script>
 
-  
-  <!-- {% if results %}
+  <button onclick="window.location.href='/redirect'">Go to Main Page</button>
 
-    <h3>Result</h3>
-    <div class="result-box">
-      <div class="result">{{ results }}</div>
-      <hr>
-      <button onclick="copyToClipboard()">Copy</button>
-    </div>
+  <h3>Result</h3>
+  <div class="result-box">
 
-  {% endif %}
+    {% for result in results %}
+    <div class="result">{{ result }}</div>
+    <hr>
+    <button onclick="copyToClipboard()">Copy</button>
+    <hr>
+    {% endfor %}
+  </div>
+
+  <hr>
 
   <script>
     function copyToClipboard() {
@@ -104,10 +107,6 @@
           console.error('Failed to copy text: ', error);
         });
     }
-    </script> -->
-    
-  <hr>
+    </script>
 
-
-</body>
 
