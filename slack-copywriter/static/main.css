@@ -162,6 +162,7 @@ input[type="submit"] {
 }
 
 
+
 .result-box {
   border: 1px solid #10a37f;
   padding: 24px 64px;
@@ -190,7 +191,7 @@ input[type="submit"] {
   font-size: 16px;
 }
 
-.redirect-button button {
+.clear-button button {
   display: inline-block;
   padding: 8px 8px;
   background-color: #24499f;

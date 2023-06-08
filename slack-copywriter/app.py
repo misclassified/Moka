@@ -37,6 +37,8 @@ def index():
         persona = request.form["persona"]
         purpose = request.form["purpose"]
         language = request.form["language"]
+        words = request.form["slider"]
+        print(words)
 
         prompt = one_shot_prompt(
             topic=topic,
@@ -44,7 +46,7 @@ def index():
             persona = persona,
             tone=tone,
             purpose = purpose,
-            words = 30,
+            words = words,
             language = language)
 
         results = get_completion(prompt)

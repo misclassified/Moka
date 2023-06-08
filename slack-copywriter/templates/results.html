@@ -24,7 +24,7 @@
 
   <form action="/" method="post">
     
-    <input type="text" name="topic" placeholder="Enter a topic of interest" required />
+    <input type="text" name="topic" placeholder="Enter a topic of interest" value="{{topic}}" required />
    
     <hr>
 
@@ -58,9 +58,9 @@
       {% endfor %}
     </select>
 
-    <label for="slider" class = "slider-label">Select the number of words:</label>
-    <input type="range" id="slider" name="slider" min="20" max="150" value="30" step="1">
-    <span id="slider-value" class = "slider-value-label">30</span>
+    <label for="slider" class = "slider-label">Select the maximum number of words:</label>
+    <input type="range" id="slider" name="slider" min="20" max="150" value="{{words}}" step="1">
+    <span id="slider-value" class = "slider-value-label">{{words}}</span>
     <br>
 
     <input type="submit" value="Generate Post" />
@@ -79,8 +79,11 @@
     }
 </script>
 
-  <button onclick="window.location.href='/redirect'">Go to Main Page</button>
-
+  <div class="clear-button">
+  <button onclick="window.location.href='/redirect'" >Clear All Selections</button>
+  </div>
+  
+  <br>
   <h3>Result</h3>
   <div class="result-box">
 
