@@ -1,17 +1,18 @@
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def one_shot_prompt(
-             topic = None,
-             channel = None, 
-             persona = None, 
-             tone = None, 
-             purpose = None,
-             words = None, 
-             language = None):
-    
+    topic=None,
+    channel=None,
+    persona=None,
+    tone=None,
+    purpose=None,
+    words=None,
+    language=None,
+):
     prompt = f"""
 
     You are copywriter for a digital marketing agency. You are asked
@@ -32,5 +33,5 @@ def one_shot_prompt(
     "Post3": "...",
 
     """
-    
+
     return prompt
