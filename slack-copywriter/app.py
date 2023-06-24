@@ -1,10 +1,16 @@
 import json
 import os
 
+from dotenv import load_dotenv, find_dotenv
+
 import openai
 from flask import Flask, redirect, render_template, request, url_for
 
 from .src.openaifuncs import get_completion
+
+# Load Environment Variables
+_ = load_dotenv(find_dotenv())
+
 
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
