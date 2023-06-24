@@ -16,7 +16,7 @@ To run the utilities you will need to install the package manager Poetry: https:
 
 ## 2. Run the slack-copywriter app
 
-1. Navigate to the Moka directory and add your [API key](https://beta.openai.com/account/api-keys) to a newly created `.env` file.
+1. Navigate to the Moka directory and add your [API key](https://beta.openai.com/account/api-keys) to a newly created `.env` file. Name the environment variable OPENAI_API_KEY.
 
 
 2. Install libraries and dependencies:
