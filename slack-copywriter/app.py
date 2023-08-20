@@ -1,9 +1,8 @@
 import json
 import os
 
-from dotenv import load_dotenv, find_dotenv
-
 import openai
+from dotenv import find_dotenv, load_dotenv
 from flask import Flask, redirect, render_template, request, url_for
 
 from .src.openaifuncs import get_completion
