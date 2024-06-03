@@ -16,7 +16,8 @@ def one_shot_prompt(
     prompt = f"""
 
     You are copywriter for a digital marketing agency. You are asked
-    to write three post for {channel}  about the topic in treble backtick 
+    to write three post for {channel}  about the topic in treble backtick. 
+    Make sure the message sounds as authentic as possible.
     
     ```{topic}``` .
 
