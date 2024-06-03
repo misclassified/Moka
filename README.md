@@ -18,15 +18,14 @@ To run the utilities you will need to install the package manager Poetry: https:
 
 1. Navigate to the Moka directory and add your [API key](https://beta.openai.com/account/api-keys) to a newly created `.env` file. Name the environment variable OPENAI_API_KEY.
 
-
-2. Install libraries and dependencies:
-```bash
-   $ poetry install
-```
-
-3. Activate the virtual environment using Poetry:
+2. Activate the virtual environment using Poetry:
 ```bash
    $ poetry shell
+```
+
+3. Install libraries and dependencies:
+```bash
+   $ poetry install
 ```
 
 4. Navigate into the project directory:
