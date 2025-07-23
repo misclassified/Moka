@@ -24,7 +24,15 @@
 
   <form action="/" method="post">
     
-    <input type="text" name="topic" placeholder="Enter a topic of interest" required />
+    <textarea name="topic" placeholder="Enter a topic of interest" required style="overflow:hidden;resize:none;width:100%;min-height:2em;"></textarea>
+   
+    <script>
+      var topicTextarea = document.querySelector('textarea[name="topic"]');
+      topicTextarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+      });
+    </script>
    
     <hr>
 

@@ -24,7 +24,20 @@
 
   <form action="/" method="post">
     
-    <input type="text" name="topic" placeholder="Enter a topic of interest" value="{{topic}}" required />
+    <textarea name="topic" placeholder="Enter a topic of interest" required style="overflow:hidden;resize:none;width:100%;min-height:2em;">{{topic}}</textarea>
+   
+    <script>
+      var topicTextarea = document.querySelector('textarea[name="topic"]');
+      topicTextarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+      });
+      // Trigger resize on page load if there is content
+      if (topicTextarea.value) {
+        topicTextarea.style.height = 'auto';
+        topicTextarea.style.height = (topicTextarea.scrollHeight) + 'px';
+      }
+    </script>
    
     <hr>
 
