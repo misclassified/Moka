@@ -36,31 +36,36 @@
    
     <hr>
 
-    <select name="channel" id="channel" >
+    <select name="channel" id="channel"  >
+      <option value="" selected>Select your channel</option>
       {% for channel in channels %}
       <option value="{{ channel }}">{{ channel }}</option>
       {% endfor %}
     </select>
 
     <select name="persona" id="persona" >
+      <option value="" selected>Select your persona</option>
       {% for persona in personas %}
       <option value="{{ persona }}">{{ persona }}</option>
       {% endfor %}
     </select>
 
     <select name="tone" id="tone"  >
+      <option value="" selected>Select your tone of voice</option>
       {% for tone in tones %}
       <option value="{{ tone }}">{{ tone }}</option>
       {% endfor %}
     </select>
 
     <select name="purpose" id="purpose" >
+      <option value="" selected>Select your purpose</option>
       {% for purpose in purposes %}
       <option value="{{ purpose }}">{{ purpose }}</option>
       {% endfor %}
     </select>
 
     <select name="language" id="language"  >
+      <option value="" selected>Select your language</option>
       {% for language in languages %}
       <option value="{{ language }}">{{ language }}</option>
       {% endfor %}
@@ -118,4 +123,5 @@
 
 
 </body>
+
 
